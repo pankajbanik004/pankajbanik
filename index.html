@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ISKCON Mayapur Temple</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #099ad8, #7777e4, #010203);
+      color: #f0f0f0;
+    }
+
+    /* Loading Screen */
+    #loading-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      z-index: 10000;
+    }
+
+    .circle-loader {
+      position: relative;
+      width: 150px;
+      height: 150px;
+    }
+
+    .circle {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 10px solid transparent;
+      border-radius: 50%;
+      animation: rotate 2s linear infinite;
+    }
+
+    .circle:nth-child(1) {
+      border-top-color: #ff4757;
+      animation-delay: 0s;
+    }
+
+    .circle:nth-child(2) {
+      border-top-color: #ffa502;
+      animation-delay: 0.3s;
+    }
+
+    .circle:nth-child(3) {
+      border-top-color: #1e90ff;
+      animation-delay: 0.6s;
+    }
+
+    .percentage {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2em;
+      font-weight: bold;
+      color: white;
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .fade-out {
+      animation: fadeOut 1s forwards;
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    header {
+      background: url(img1.jpeg);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    header h1 {
+      font-size: 3em;
+      animation: glow 2s infinite alternate;
+    }
+
+    header p {
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #34495e;
+      padding: 10px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    nav a:hover {
+      background: #2ecc71;
+      transform: scale(1.1);
+    }
+
+    .section {
+      padding: 40px 20px;
+    }
+
+    .about {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 50px 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      margin: 20px auto;
+      width: 80%;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+    }
+
+    .about h2 {
+      text-align: center;
+      color: #00cec9;
+      margin-bottom: 30px;
+      font-size: 2.5em;
+    }
+
+    .about h3 {
+      color: #81ecec;
+      margin-top: 20px;
+      font-size: 1.8em;
+    }
+
+    .about p {
+      line-height: 1.8;
+      margin-bottom: 15px;
+      font-size: 1.1em;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f26224;
+      color: rgb(1, 1, 1);
+      margin-top: 20px;
+      box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .events {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .events h2 {
+      color: #00cec9;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+
+    .event-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .event-list li {
+      background: url(download\ \(51\).jpeg);
+      padding: 20px;
+      margin: 10px 0;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .event-list li h3 {
+      color: #81ecec;
+      margin-bottom: 10px;
+    }
+
+    .event-list li p {
+      font-size: 1.1em;
+    }
+
+    @keyframes glow {
+      0% { text-shadow: 0 0 10px #00cec9; }
+      100% { text-shadow: 0 0 20px #81ecec; }
+    }
+
+       
+
+
+
+
+
+
+
+
+
+
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #0e445b, #010203, #2f2f5e);
+      color: #f0f0f0;
+    }
+
+    header {
+      background: url(img1.jpeg);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    header h1 {
+      font-size: 3em;
+      animation: glow 2s infinite alternate;
+    }
+
+    header p {
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #34495e;
+      padding: 10px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    nav a:hover {
+      background: #2ecc71;
+      transform: scale(1.1);
+    }
+
+    .section {
+      padding: 40px 20px;
+    }
+
+    .about {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 50px 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      margin: 20px auto;
+      width: 80%;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+    }
+
+    .about h2 {
+      text-align: center;
+      color: #00cec9;
+      margin-bottom: 30px;
+      font-size: 2.5em;
+    }
+
+    .about h3 {
+      color: #81ecec;
+      margin-top: 20px;
+      font-size: 1.8em;
+    }
+
+    .about p {
+      line-height: 1.8;
+      margin-bottom: 15px;
+      font-size: 1.1em;
+    }
+
+    .about p::first-letter {
+      font-size: 1.5em;
+      color: #00cec9;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f26224;
+      color: rgb(211, 206, 206);
+      margin-top: 20px;
+      box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes glow {
+      0% { text-shadow: 0 0 10px #00cec9; }
+      100% { text-shadow: 0 0 20px #81ecec; }
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .events {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .events h2 {
+      color: #f77043;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+
+    .event-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .event-list li {
+      background: url(download\ \(51\).jpeg);
+      padding: 20px;
+      margin: 10px 0;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .event-list li h3 {
+      color: #f66650;
+      margin-bottom: 10px;
+    }
+
+    .event-list li p {
+      font-size: 1.1em;
+    }
+  
+  </style>
+</head>
+<body>
+  <!-- Loading Animation -->
+  <div id="loading-screen">
+    <div class="circle-loader">
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="percentage" id="percentage">0%</div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div id="main-content" style="display:none;">
+        <header>
+            <h1>Welcome to ISKCON Mayapur Temple</h1>
+            <p>The Spiritual Capital of the World</p>
+          </header>
+        
+          <nav>
+            <a href="#about">About</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#events">Events</a>
+            <a href="#contact">Contact</a>
+          </nav>
+        
+          <div class="section about" id="about">
+            <h2>About ISKCON Mayapur</h2>
+        
+            <h3>The Vision of Srila Prabhupada</h3>
+            <p>ISKCON Mayapur was founded by His Divine Grace A.C. Bhaktivedanta Swami Prabhupada with the vision of creating a spiritual hub where people from all over the world could come to learn about and experience the teachings of Lord Krishna. This holy site is regarded as the birthplace of Sri Chaitanya Mahaprabhu, the proponent of the Bhakti movement.</p>
+        
+            <h3>The Grand Temple of Vedic Planetarium</h3>
+            <p>The Temple of the Vedic Planetarium is the centerpiece of ISKCON Mayapur. It is a majestic structure that blends modern engineering with ancient Vedic wisdom. The temple is designed to inspire awe and reverence, featuring intricate carvings, a massive chandelier representing the universe, and state-of-the-art displays of Vedic cosmology.</p>
+        
+            <h3>Daily Spiritual Activities</h3>
+            <p>The temple offers a range of daily activities such as Mangala Arati, kirtans, Bhagavad Gita discourses, and prasadam distribution. Visitors are encouraged to participate and immerse themselves in the spiritual atmosphere of the temple.</p>
+        
+            <h3>Community Outreach Programs</h3>
+            <p>ISKCON Mayapur is also known for its extensive community outreach programs. These include free food distribution, educational initiatives, and healthcare services for the underprivileged. The temple's efforts reflect the teachings of compassion and service.</p>
+        
+            <h3>Eco-Friendly Living</h3>
+            <p>The temple complex promotes sustainable and eco-friendly living. With organic farming, renewable energy initiatives, and waste management programs, ISKCON Mayapur serves as a model for harmonious living with nature.</p>
+        
+            <h3>The Spiritual Significance of Mayapur</h3>
+            <p>Mayapur is considered one of the most sacred places in India. It is part of the Navadvipa Mandala, a cluster of nine islands symbolizing the petals of a lotus flower. The spiritual vibrations of this land attract thousands of devotees annually.</p>
+        
+            <h3>Festivals and Celebrations</h3>
+            <p>The temple hosts numerous festivals throughout the year, including Gaura Purnima, Janmashtami, and Ratha Yatra. These events are celebrated with grandeur, drawing devotees and visitors from all over the world.</p>
+        
+            <h3>A Place of Global Harmony</h3>
+            <p>ISKCON Mayapur stands as a beacon of global harmony, welcoming people from diverse backgrounds to unite under the banner of love and devotion to Lord Krishna. The temple's motto is "Simple living, high thinking."</p>
+          </div>
+        
+          <div class="section gallery" id="gallery">
+            <h2>Gallery</h2>
+            <div>
+              <img src="download (45).jpeg" alt="Temple View"><h3 style="text-align: center;color: #eab8b8;">Temple View</h3>
+              <img src="download (46).jpeg" alt="Festivals"><h3 style="text-align: center;color: #917a7a;">Festivals</h3>
+              <img src="download (47).jpeg" alt="Prasadam"><h3 style="text-align: center;color: #cea4a4;">Prasadam</h3>
+              <img src="download (49).jpeg" alt="Devotees"><h3 style="text-align: center;color: #7d6e6e;">Devotees</h3>
+            </div>
+          </div>
+        
+          <div class="section events" id="events">
+            <h2>Upcoming Events</h2>
+            <ul class="event-list">
+              <li>
+                <h3>Gaura Purnima Festival</h3>
+                <p>Date: March 14, 2025</p>
+                <p>Experience the grand celebrations of Lord Chaitanya's appearance day with kirtans, discourses, and a grand feast.</p>
+              </li>
+              <li>
+                <h3>Janmashtami</h3>
+                <p>Date: August 16, 2025</p>
+                <p>Celebrate the birth of Lord Krishna with cultural programs, abhishekam, and midnight arati.</p>
+              </li>
+              <li>
+                <h3>Ratha Yatra</h3>
+                <p>Date: June 27, 2025</p>
+                <p>Join the chariot festival of Lord Jagannath through the streets of Mayapur.</p>
+              </li>
+            </ul>
+          </div>
+        
+          
+        
+          <footer>
+            <p>ISKCON, Chandrodaya Mandir, Mayapur, West Bengal 741313</p>
+            <p><a href="mailto: pankajbanik2005@gamil.com">pankajbanik2005@gamil.com</a></p>
+           
+          </footer>
+          <audio id="loading-sound" src="Animated Quiz Timer Loading Bar 3 Seconds with Sound - Green Screen (4K) [ ezmp3.cc ].mp3"></audio>
+
+
+
+
+          
+        
+      
+
+  <script>
+    const percentageText = document.getElementById("percentage");
+    const loadingScreen = document.getElementById("loading-screen");
+    const mainContent = document.getElementById("main-content");
+
+    let percentage = 0;
+    const loadingInterval = setInterval(() => {
+      percentage += 1;
+      percentageText.textContent = `${percentage}%`;
+
+      if (percentage >= 100) {
+        clearInterval(loadingInterval);
+        loadingScreen.classList.add("fade-out");
+        setTimeout(() => {
+          loadingScreen.style.display = "none";
+          mainContent.style.display = "block";
+        }, 1000);
+      }
+    }, 30);
+
+
+
+
+    
+    const loadingContainer = document.getElementById('loading');
+    const loadingSound = document.getElementById('loading-sound');
+
+    // Play sound when the loading starts
+    window.onload = function () {
+      loadingSound.play();
+      setTimeout(() => {
+        loadingContainer.style.display = 'none'; // Hide the loading animation after 3 seconds
+      }, 3000);
+    };
+  
+
+
+
+
+
+  </script>
+
+
+
+
+</body>
+</html>
